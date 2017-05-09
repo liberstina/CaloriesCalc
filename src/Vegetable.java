@@ -2,7 +2,7 @@
  * Created by Marinka on 05.05.2017.
  */
 public class Vegetable {
-    public int calories; //in 100 gramms
+    public int calories;
     public final String color;
     public int weight;
 
@@ -30,11 +30,8 @@ public class Vegetable {
         this.weight = weight;
     }
 
-    public Vegetable(int calories, String color) {
-        this.calories = calories;
+    public Vegetable(String color, int weight) {
         this.color = color;
-        //this.weight = weight;
+        this.weight = weight;
     }
-
-
 }
