@@ -1,17 +1,17 @@
 /**
  * Created by Marinka on 05.05.2017.
  */
-public class Vegetable {
-    public int calories; //in 100 gramms
-    public final String color;
-    public int weight;
+public abstract class Vegetable {
+    protected final int calories;
+    protected final String color;
+    protected final int weight;
 
     public int getCalories() {
         return calories;
     }
 
     public void setCalories(int calories) {
-        this.calories = calories;
+        //this.calories = calories;
     }
 
     public void setColor(String color) {
@@ -27,13 +27,13 @@ public class Vegetable {
     }
 
     public void setWeight(int weight) {
-        this.weight = weight;
+        //this.weight = weight;
     }
 
-    public Vegetable(int calories, String color) {
+    public Vegetable(int calories, String color, int weight) {
         this.calories = calories;
         this.color = color;
-        //this.weight = weight;
+        this.weight = weight;
     }
 
 

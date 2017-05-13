@@ -1,93 +1,102 @@
+import org.omg.CORBA.NO_IMPLEMENT;
+
 import java.util.HashMap;
 import java.util.Map;
-import java.util.Scanner;
+import java.util.Objects;
+import java.util.stream.Collectors;
 
 /**
  * Created by Marinka on 05.05.2017.
  */
 public class Chief {
+    Potato potato = new Potato();
+    Eggplant eggplant = new Eggplant();
+    Tomato tomato = new Tomato();
+    Cucumber cucumber = new Cucumber();
 
-    private int potatoes;
-    private int eggplants;
-    private int tomatoes;
-    private int cucumbers;
+    public Map<Vegetable, Integer> salad = new HashMap<Vegetable, Integer>();
+    public Map<Vegetable, Integer> sortByWeight = new HashMap<Vegetable, Integer>();
+    public Map<Vegetable, Integer> sortByCalories = new HashMap<Vegetable, Integer>();
+    public Map<Vegetable, String> findColor = new HashMap<Vegetable, String>();
 
-    Potato potato = new Potato(120);
-    Eggplant eggplant = new Eggplant(100);
-    Tomato tomato = new Tomato(70);
-    Cucumber cucumber = new Cucumber(70);
-
-    public Map salad = new HashMap<Vegetable, Integer>();
-
-    public Map<Vegetable, Integer> createSalad(){
-        System.out.println("To add potatoes to salad enter number of gramms or either enter 0");
-        Scanner scan = new Scanner(System.in);
-        potatoes = scan.nextInt();
-        System.out.println("To add eggplants to salad enter number of gramms or either enter 0");
-        eggplants = scan.nextInt();
-        System.out.println("To add tomatoes to salad enter number of gramms or either enter 0");
-        tomatoes = scan.nextInt();
-        System.out.println("To add cucumbers to salad enter number of gramms or either enter 0");
-        cucumbers = scan.nextInt();
+    public Map<Vegetable, Integer> createSalad(int potatoes, int eggplants, int tomatoes, int cucumbers){
         salad.put(potato, potatoes);
         salad.put(eggplant, eggplants);
         salad.put(tomato, tomatoes);
         salad.put(cucumber, cucumbers);
+
         System.out.println("Salad is created!");
         return salad;
     }
-//до этого момента все хорошо. как в добавлении удалении овощей суммировать в мапе новое кол-во ключа со старым?
 
-    public Map<Vegetable, Integer> addVegetables(){
-        //int potatoesnumber = salad.get(potato); почему я не могу взять по ключу значение из мапы, получается что беру объект?
-        //соответственно не могу и просуммировать
-        salad.get(eggplant);
-        salad.get(tomato);
-        salad.get(cucumber);
-        System.out.println("To add potatoes to salad enter number of gramms or either enter 0");
-        Scanner scan = new Scanner(System.in);
-        potatoes = scan.nextInt();
-        System.out.println("To add eggplants to salad enter number of gramms or either enter 0");
-        eggplants = scan.nextInt();
-        System.out.println("To add tomatoes to salad enter number of gramms or either enter 0");
-        tomatoes = scan.nextInt();
-        System.out.println("To add cucumbers to salad enter number of gramms or either enter 0");
-        cucumbers = scan.nextInt();
-       /* for (Map.Entry<Vegetable, Integer> entry : salad.entrySet()){
-с фор-ич вообще подчеркивает красным, хотя я гуглила - везде используется для мапы такой вариант перебора каждой пары
-        }*/
-        salad.put(potato, potatoes);
-        salad.put(eggplant, eggplants);
-        salad.put(tomato, tomatoes);
-        salad.put(cucumber, cucumbers);
+    public Map<Vegetable, Integer> addVegetables(Vegetable vegetable, int quantity){
+        System.out.println("Let's make salad tastier and add something...");
+        System.out.println("Let's add " + vegetable);
 
+        int value = (Integer) salad.get(vegetable);
+        salad.put(vegetable, value + quantity);
         return salad;
     }
 
     public Map<Vegetable, Integer> removeVegetables(Vegetable vegetable){
-//тут не поняла - нужно в демоклассе прописывать овощ или с консоли вводить. И опять же та же беда с мапами. Тут был похожий код, но я его пока удалила
-
+        System.out.println("Let's make salad tastier and remove " + vegetable);
+        salad.remove(vegetable);
         return salad;
 
     }
 
     public void displaySaladIngridients(){
-        System.out.println(salad);
-//тут должно быть выведено ингридиент и сколько его или просто какие овощи входят? просто у меня получается, что если не входит, то будет отображаться просто с кол-вом ноль
-    }
-//до переопределения методов, сравнения, поиска и сортировки даже не дошла еще
-    void sortVegetables(){
-
+        System.out.println("Salad consists of " + salad.toString());
     }
 
-    void findVegetables(){
+    public void sortVegetablesByCalories(){
+        sortByCalories.put(potato, potato.calories);
+        sortByCalories.put(eggplant, eggplant.calories);
+        sortByCalories.put(cucumber, cucumber.calories);
+        sortByCalories.put(tomato, tomato.calories);
+        System.out.println("Let's sort our salad by calories!");
+        sortByCalories.entrySet().stream()
+                .sorted(Map.Entry.comparingByValue())
+                .forEach(System.out::println);
 
     }
 
-    void compareVegetables(){
+    public void sortVegetablesByWeight(){
+        sortByWeight.put(potato, potato.weight);
+        sortByWeight.put(eggplant, eggplant.weight);
+        sortByWeight.put(cucumber, cucumber.weight);
+        sortByWeight.put(tomato, tomato.weight);
+        System.out.println("Let's sort our salad by weight!");
+        sortByWeight.entrySet().stream().sorted(Map.Entry.comparingByValue()).forEach(System.out::println);
 
     }
 
+    public void findVegetablesByColor(String color) {
+        String NoVegetable = "There is no such vegetable. Try again.";
+        String Find = "";
+        System.out.println("Let's find vegetable by color " + color);
+        System.out.println(findColor.get(color));
+        if (findColor.containsKey(color))
+            System.out.println(findColor.get(color));
+        else
+            System.out.println(NoVegetable);
+        /*
+        for (Map.Entry<Vegetable, String> entry : findColor.entrySet()) {
+            if (entry.getValue().equals(color))
+                Find = findColor.;
+            else
+                Find = NoVegetable;
+        }
+        System.out.println(Find);
+        */
+    }
+    public void compareVegetables(Vegetable vegetable, Vegetable vegetable1){
+
+        if (vegetable.equals(vegetable1))
+            System.out.println("These two vegetables are equal");
+        else
+            System.out.println("These two vegetables are not equal");
+    }
 
     public void sayHello(){
         System.out.println("Hello! Today we will cook salad");
