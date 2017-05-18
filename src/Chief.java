@@ -92,26 +92,31 @@ public class Chief {
     }
 
     public void findVegetablesByColor(String color) {
-        Map<Vegetable, String> findColor = new HashMap<>();
-        // findColor.put(salad.get(Vegetable), Vegetable.)
-        String NoVegetable = "There is no such vegetable. Try again.";
-        String Find = "";
         System.out.println("Let's find vegetable by color " + color);
-        System.out.println(findColor.get(color));
-        if (findColor.containsKey(color))
-            System.out.println(findColor.get(color));
-        else
-            System.out.println(NoVegetable);
-        /*
-        for (Map.Entry<Vegetable, String> entry : findColor.entrySet()) {
-            if (entry.getValue().equals(color))
-                Find = findColor.;
-            else
-                Find = NoVegetable;
+        Map<Vegetable, String> findColor = new HashMap<>();
+
+        for (Map.Entry<Vegetable, Integer> entry : salad.entrySet()) {
+            if (entry.getKey().equals(potato)) {
+                findColor.put(potato, potato.getColor());
+            } else if (entry.getKey().equals(tomato)) {
+                findColor.put(tomato, tomato.getColor());
+            } else if (entry.getKey().equals(cucumber)) {
+                findColor.put(cucumber, cucumber.getColor());
+            } else if (entry.getKey().equals(eggplant)) {
+                findColor.put(eggplant, eggplant.getColor());
+            }
         }
-        System.out.println(Find);
-        */
+        String NoVegetable = "There is no such vegetable. Try again.";
+        for (Map.Entry<Vegetable, String> pair : findColor.entrySet()) {
+            if (color.equals(pair.getValue()))
+                System.out.println(pair.getKey());
+            
+            else
+
+                System.out.println(NoVegetable);
+        }
     }
+
 
     public void compareVegetables(Vegetable vegetable, Vegetable vegetable1) {
 
