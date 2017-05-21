@@ -1,6 +1,6 @@
-import org.omg.CORBA.NO_IMPLEMENT;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.Objects;
 import java.util.stream.Collectors;
@@ -9,12 +9,40 @@ import java.util.stream.Collectors;
  * Created by Marinka on 05.05.2017.
  */
 public class Chief {
-    private Potato potato = new Potato();
-    private Eggplant eggplant = new Eggplant();
-    private Tomato tomato = new Tomato();
-    private Cucumber cucumber = new Cucumber();
 
-    private Map<Vegetable, Integer> salad = new HashMap<>();
+    protected static Potato potato;
+    protected static Eggplant eggplant;
+    protected static Tomato tomato;
+    protected static Cucumber cucumber;
+
+    public Chief() {
+        this.potato = new Potato();
+        this.eggplant = new Eggplant();
+        this.tomato = new Tomato();
+        this.cucumber = new Cucumber();
+    }
+
+    public static Potato getPotato() {
+        return potato;
+    }
+
+    public static Eggplant getEggplant() {
+        return eggplant;
+    }
+
+    public static Tomato getTomato() {
+        return tomato;
+    }
+
+    public static Cucumber getCucumber() {
+        return cucumber;
+    }
+
+    private static Map<Vegetable, Integer> salad = new HashMap<>();
+
+    public static Map<Vegetable, Integer> getSalad() {
+        return salad;
+    }
 
     public Map<Vegetable, Integer> createSalad(int potatoes, int eggplants, int tomatoes, int cucumbers) {
         salad.put(potato, potatoes);
@@ -28,7 +56,6 @@ public class Chief {
     public Map<Vegetable, Integer> addVegetables(Vegetable vegetable, int quantity) {
         System.out.println("Let's make salad tastier and add something...");
         System.out.println("Let's add " + vegetable);
-
         int value = salad.get(vegetable);
         salad.put(vegetable, value + quantity);
         return salad;
@@ -38,7 +65,6 @@ public class Chief {
         System.out.println("Let's make salad tastier and remove " + vegetable);
         salad.remove(vegetable);
         return salad;
-
     }
 
     public void displaySaladIngridients() {
@@ -87,12 +113,10 @@ public class Chief {
             }
         }
         sortByWeight.entrySet().stream().sorted(Map.Entry.comparingByValue()).forEach(System.out::println);
-
-
     }
 
     public void findVegetablesByColor(String color) {
-        System.out.println("Let's find vegetable by color " + color);
+        System.out.println("Let's find vegetable by color: " + color);
         Map<Vegetable, String> findColor = new HashMap<>();
 
         for (Map.Entry<Vegetable, Integer> entry : salad.entrySet()) {
@@ -106,20 +130,19 @@ public class Chief {
                 findColor.put(eggplant, eggplant.getColor());
             }
         }
-        String NoVegetable = "There is no such vegetable. Try again.";
+        String Result = "";
         for (Map.Entry<Vegetable, String> pair : findColor.entrySet()) {
-            if (color.equals(pair.getValue()))
-                System.out.println(pair.getKey());
-            
-            else
-
-                System.out.println(NoVegetable);
+            if (color.equals(pair.getValue())) {
+                Result = pair.getKey().toString();
+                break;
+            } else
+                Result = "There is no such vegetable. Try again.";
         }
+        System.out.println(Result);
     }
 
-
     public void compareVegetables(Vegetable vegetable, Vegetable vegetable1) {
-
+        System.out.println("Let's compare " + vegetable + " and " + vegetable1);
         if (vegetable.equals(vegetable1))
             System.out.println("These two vegetables are equal");
         else
@@ -129,5 +152,4 @@ public class Chief {
     public void sayHello() {
         System.out.println("Hello! Today we will cook salad");
     }
-
 }

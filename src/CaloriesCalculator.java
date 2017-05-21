@@ -6,25 +6,24 @@ import java.util.Map;
  */
 public class CaloriesCalculator {
 
-    Potato potato = new Potato();
-    Eggplant eggplant = new Eggplant();
-    Tomato tomato = new Tomato();
-    Cucumber cucumber = new Cucumber();
-    public Map<Vegetable, Integer> saladCalories = new HashMap<Vegetable, Integer>();
-
     public void calculate() {
-
-        //   * Demo.Hulio.salad.get(eggplant)
+        Map<Vegetable, Integer> saladCalories = new HashMap<>();
+        saladCalories.putAll(Chief.getSalad());
         System.out.println("Let's calculate calories of our salad");
-        // for (Map.Entry<Vegetable, Integer> entry : saladCalories.entrySet())
         int sum = 0;
-        saladCalories.put(potato, potato.calories);
-        saladCalories.put(tomato, tomato.calories);
-        saladCalories.put(cucumber, cucumber.calories);
-        saladCalories.put(eggplant, eggplant.calories);
+        for (Map.Entry<Vegetable, Integer> entry : saladCalories.entrySet())
+            if (entry.getKey().equals(Chief.getPotato())) {
+                saladCalories.put(Chief.getPotato(), entry.getValue() * Chief.getPotato().calories);
+            } else if (entry.getKey().equals(Chief.getTomato())) {
+                saladCalories.put(Chief.getTomato(), entry.getValue() * Chief.getTomato().calories);
+            } else if (entry.getKey().equals(Chief.getCucumber())) {
+                saladCalories.put(Chief.getCucumber(), entry.getValue() * Chief.getCucumber().calories);
+            } else if (entry.getKey().equals(Chief.getEggplant())) {
+                saladCalories.put(Chief.getEggplant(), entry.getValue() * Chief.getEggplant().calories);
+            }
 
-        for (Map.Entry<Vegetable, Integer> entry : saladCalories.entrySet()) {
-            sum = sum + entry.getValue();
+        for (Map.Entry<Vegetable, Integer> entry1 : saladCalories.entrySet()) {
+            sum = sum + entry1.getValue();
         }
         System.out.println("The sum of salad calories is " + sum);
     }
