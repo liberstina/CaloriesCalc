@@ -1,20 +1,18 @@
 
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
-import java.util.Objects;
-import java.util.stream.Collectors;
 
 /**
  * Created by Marinka on 05.05.2017.
  */
 public class Chief {
-
+    //Why protected?
     protected static Potato potato;
     protected static Eggplant eggplant;
     protected static Tomato tomato;
     protected static Cucumber cucumber;
 
+    //CONSTRUCTOR INITS STATIC CLASS MEMBERS - мы говорили о переменных экземпляра и класса! Забыла! Повторить
     public Chief() {
         this.potato = new Potato();
         this.eggplant = new Eggplant();
@@ -38,12 +36,14 @@ public class Chief {
         return cucumber;
     }
 
+    //Why separated from other class variables?
     private static Map<Vegetable, Integer> salad = new HashMap<>();
 
     public static Map<Vegetable, Integer> getSalad() {
         return salad;
     }
 
+    //Мы говорили о принимаемых параментрах переменной длины - тут можно было бы воспользоваться, т.к. все входящие переменные одного типа
     public Map<Vegetable, Integer> createSalad(int potatoes, int eggplants, int tomatoes, int cucumbers) {
         salad.put(potato, potatoes);
         salad.put(eggplant, eggplants);
@@ -61,6 +61,7 @@ public class Chief {
         return salad;
     }
 
+    //Remove total vegetables count of current selected type?
     public Map<Vegetable, Integer> removeVegetables(Vegetable vegetable) {
         System.out.println("Let's make salad tastier and remove " + vegetable);
         salad.remove(vegetable);
@@ -90,6 +91,7 @@ public class Chief {
                 sortByCalories.put(eggplant, eggplantCalories);
             }
         }
+        //Very good!
         sortByCalories.entrySet().stream().sorted(Map.Entry.comparingByValue()).forEach(System.out::println);
     }
 
@@ -130,6 +132,7 @@ public class Chief {
                 findColor.put(eggplant, eggplant.getColor());
             }
         }
+        //Inner variable starts from capitalize letter - not according to code convention
         String Result = "";
         for (Map.Entry<Vegetable, String> pair : findColor.entrySet()) {
             if (color.equals(pair.getValue())) {
@@ -141,6 +144,7 @@ public class Chief {
         System.out.println(Result);
     }
 
+    //Maybe, this method should be in vegetables class?
     public void compareVegetables(Vegetable vegetable, Vegetable vegetable1) {
         System.out.println("Let's compare " + vegetable + " and " + vegetable1);
         if (vegetable.equals(vegetable1))
