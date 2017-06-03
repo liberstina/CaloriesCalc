@@ -1,8 +1,5 @@
 
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.Objects;
+import java.util.*;
 import java.util.stream.Collectors;
 
 /**
@@ -10,16 +7,18 @@ import java.util.stream.Collectors;
  */
 public class Chief {
 
-    protected static Potato potato;
-    protected static Eggplant eggplant;
-    protected static Tomato tomato;
-    protected static Cucumber cucumber;
+    private static Potato potato;
+    private static Eggplant eggplant;
+    private static Tomato tomato;
+    private static Cucumber cucumber;
+    private static Map<Vegetable, Integer> salad = new HashMap<>();
 
+    //CONSTRUCTOR INITS STATIC CLASS MEMBERS - мы говорили о переменных экземпляра и класса! Забыла! Повторить
     public Chief() {
-        this.potato = new Potato();
-        this.eggplant = new Eggplant();
-        this.tomato = new Tomato();
-        this.cucumber = new Cucumber();
+        this.potato = new Potato(potato.getWeight());
+        this.eggplant = new Eggplant(potato.getWeight());
+        this.tomato = new Tomato(potato.getWeight());
+        this.cucumber = new Cucumber(potato.getWeight());
     }
 
     public static Potato getPotato() {
@@ -38,29 +37,27 @@ public class Chief {
         return cucumber;
     }
 
-    private static Map<Vegetable, Integer> salad = new HashMap<>();
 
     public static Map<Vegetable, Integer> getSalad() {
         return salad;
     }
 
-    public Map<Vegetable, Integer> createSalad(int potatoes, int eggplants, int tomatoes, int cucumbers) {
-        salad.put(potato, potatoes);
-        salad.put(eggplant, eggplants);
-        salad.put(tomato, tomatoes);
-        salad.put(cucumber, cucumbers);
+    public Map<Vegetable, Integer> createSalad(List<Vegetable> mySalad) {
+        for (int i = 0; i < mySalad.size(); i++){
+            salad.put(mySalad.get(i), mySalad.get(i).getWeight());
+        }
         System.out.println("Salad is created!");
         return salad;
     }
 
-    public Map<Vegetable, Integer> addVegetables(Vegetable vegetable, int quantity) {
+    public Map<Vegetable, Integer> addVegetables(Vegetable vegetable, int weight) {
         System.out.println("Let's make salad tastier and add something...");
         System.out.println("Let's add " + vegetable);
         int value = salad.get(vegetable);
-        salad.put(vegetable, value + quantity);
+        salad.put((Vegetable) vegetable, value + weight);
         return salad;
     }
-
+    //Remove total vegetables count of current selected type?
     public Map<Vegetable, Integer> removeVegetables(Vegetable vegetable) {
         System.out.println("Let's make salad tastier and remove " + vegetable);
         salad.remove(vegetable);
@@ -130,17 +127,18 @@ public class Chief {
                 findColor.put(eggplant, eggplant.getColor());
             }
         }
-        String Result = "";
+        //Inner variable starts from capitalize letter - not according to code convention
+        String result = "";
         for (Map.Entry<Vegetable, String> pair : findColor.entrySet()) {
             if (color.equals(pair.getValue())) {
-                Result = pair.getKey().toString();
+                result = pair.getKey().toString();
                 break;
             } else
-                Result = "There is no such vegetable. Try again.";
+                result = "There is no such vegetable. Try again.";
         }
-        System.out.println(Result);
+        System.out.println(result);
     }
-
+    //Maybe, this method should be in vegetables class?
     public void compareVegetables(Vegetable vegetable, Vegetable vegetable1) {
         System.out.println("Let's compare " + vegetable + " and " + vegetable1);
         if (vegetable.equals(vegetable1))

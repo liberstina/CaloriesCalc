@@ -3,8 +3,21 @@
  */
 public abstract class Vegetable {
     protected int calories;
-    protected String color;
     protected int weight;
+    protected String color;
+    protected final String name;
+
+     public String getName() {
+        return name;
+    }
+
+    public String getColor() {
+        return color;
+    }
+
+    public void setColor(String color) {
+        this.color = color;
+    }
 
     public int getCalories() {
         return calories;
@@ -12,14 +25,6 @@ public abstract class Vegetable {
 
     public void setCalories(int calories) {
         this.calories = calories;
-    }
-
-    public void setColor(String color) {
-        this.color = color;
-    }
-
-    public String getColor() {
-        return color;
     }
 
     public int getWeight() {
@@ -30,10 +35,9 @@ public abstract class Vegetable {
         this.weight = weight;
     }
 
-    public Vegetable(int calories, String color, int weight) {
+    public Vegetable(String name, int calories) {
+        this.name = this.getClass().getName();
         this.calories = calories;
-        this.color = color;
-        this.weight = weight;
     }
 
     @Override
@@ -41,7 +45,6 @@ public abstract class Vegetable {
         int hash = 1;
         hash = hash * 31 + calories;
         hash = hash * 31 + weight;
-        hash = hash * 31 + color.hashCode();
         return hash;
     }
 
@@ -57,8 +60,6 @@ public abstract class Vegetable {
         if (calories != other.calories)
             return false;
         if (weight != other.weight)
-            return false;
-        if (!color.equals(other.color))
             return false;
         return true;
     }

@@ -1,5 +1,6 @@
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 /**
  * Created by Marinka on 05.05.2017.
@@ -7,17 +8,26 @@ import java.util.List;
 public class Demo {
 
     public static void main(String[] args) {
-
+        Potato potato = new Potato(50);
+        Eggplant eggplant = new Eggplant(30);
+        Cucumber cucumber = new Cucumber(200);
+        Tomato tomato = new Tomato(150);
+        List<Vegetable> myPocket = new ArrayList<>();
+        myPocket.add(eggplant);
+        myPocket.add(potato);
+        myPocket.add(cucumber);
+        myPocket.add(tomato);
         CaloriesCalculator caloriesCalculator = new CaloriesCalculator();
         Chief hulio = new Chief();
         hulio.sayHello();
-        hulio.createSalad(2, 1, 3, 4);
+        hulio.createSalad(myPocket);
         hulio.displaySaladIngridients();
-        caloriesCalculator.calculate();
-        hulio.addVegetables(hulio.getPotato(), 1);
+        Map<Vegetable, Integer> vegetableIntegerMap = hulio.getSalad();
+        caloriesCalculator.calculate(vegetableIntegerMap);
+        hulio.addVegetables(tomato, 100);
         hulio.displaySaladIngridients();
-        hulio.removeVegetables(hulio.getEggplant());
-        caloriesCalculator.calculate();
+        hulio.removeVegetables(potato);
+        caloriesCalculator.calculate(vegetableIntegerMap);
         hulio.displaySaladIngridients();
         hulio.sortVegetablesByWeight();
         hulio.sortVegetablesByCalories();

@@ -2,12 +2,10 @@
  * Created by Marinka on 05.05.2017.
  */
 public class Tomato extends Vegetable {
-    public Tomato() {
-        super(30, "red", 65);
-    }
+    public Tomato(int weight) {super("tomato",weight*30/100);}
 
     @Override
     public String toString() {
-        return "Tomato";
+        return name;
     }
 }

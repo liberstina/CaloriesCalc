@@ -2,12 +2,10 @@
  * Created by Marinka on 05.05.2017.
  */
 public class Eggplant extends Vegetable {
-    public Eggplant() {
-        super(40, "violet", 120);
-    }
+    public Eggplant(int weight) {super("eggplant", weight*40/100);}
 
     @Override
     public String toString() {
-        return "Eggplant";
+        return name;
     }
 }
