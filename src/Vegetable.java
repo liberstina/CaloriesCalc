@@ -35,9 +35,10 @@ public abstract class Vegetable {
         this.weight = weight;
     }
 
-    public Vegetable(String name, int calories) {
+    public Vegetable(String name, int calories, int weight) {
         this.name = this.getClass().getName();
         this.calories = calories;
+        this.weight = weight;
     }
 
     @Override

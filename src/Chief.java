@@ -1,44 +1,52 @@
 
-import java.util.*;
-import java.util.stream.Collectors;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 /**
  * Created by Marinka on 05.05.2017.
  */
 public class Chief {
 
-    private static Potato potato;
-    private static Eggplant eggplant;
-    private static Tomato tomato;
-    private static Cucumber cucumber;
-    private static Map<Vegetable, Integer> salad = new HashMap<>();
+    private Potato potato;
+    private Eggplant eggplant;
+    private Tomato tomato;
+    private Cucumber cucumber;
+    private Map<Vegetable, Integer> salad;
 
     //CONSTRUCTOR INITS STATIC CLASS MEMBERS - мы говорили о переменных экземпляра и класса! Забыла! Повторить
-    public Chief() {
-        this.potato = new Potato(potato.getWeight());
-        this.eggplant = new Eggplant(potato.getWeight());
-        this.tomato = new Tomato(potato.getWeight());
-        this.cucumber = new Cucumber(potato.getWeight());
+    public Chief(Potato potato, Eggplant eggplant, Tomato tomato, Cucumber cucumber){//Vegetable ... vegetables) {
+        /*Vegetable[] vegetables1 = vegetables;
+        for (Vegetable v: vegetables1) {
+            if(v instanceof Potato){
+                this.potato = (Potato) v;
+            }
+        }*/
+        this.potato = potato;
+        this.eggplant = eggplant;
+        this.tomato = tomato;
+        this.cucumber = cucumber;
+        this.salad = new HashMap<>();
     }
 
-    public static Potato getPotato() {
+    public Potato getPotato() {
         return potato;
     }
 
-    public static Eggplant getEggplant() {
+    public Eggplant getEggplant() {
         return eggplant;
     }
 
-    public static Tomato getTomato() {
+    public Tomato getTomato() {
         return tomato;
     }
 
-    public static Cucumber getCucumber() {
+    public Cucumber getCucumber() {
         return cucumber;
     }
 
 
-    public static Map<Vegetable, Integer> getSalad() {
+    public Map<Vegetable, Integer> getSalad() {
         return salad;
     }
 
@@ -64,7 +72,7 @@ public class Chief {
         return salad;
     }
 
-    public void displaySaladIngridients() {
+    public void displaySaladIngridients(Map<Vegetable, Integer> salad) {
         System.out.println("Salad consists of " + salad.toString());
     }
 
@@ -90,26 +98,9 @@ public class Chief {
         sortByCalories.entrySet().stream().sorted(Map.Entry.comparingByValue()).forEach(System.out::println);
     }
 
-    public void sortVegetablesByWeight() {
+    public void sortVegetablesByWeight(Map<Vegetable, Integer> salad) {
         System.out.println("Let's sort our salad by weight!");
-        Map<Vegetable, Integer> sortByWeight = new HashMap<>();
-        sortByWeight.putAll(salad);
-        for (Map.Entry<Vegetable, Integer> entry : sortByWeight.entrySet()) {
-            if (entry.getKey().equals(potato)) {
-                int potatoWeight = potato.getWeight() * entry.getValue();
-                sortByWeight.put(potato, potatoWeight);
-            } else if (entry.getKey().equals(tomato)) {
-                int tomatoWeight = tomato.getWeight() * entry.getValue();
-                sortByWeight.put(tomato, tomatoWeight);
-            } else if (entry.getKey().equals(cucumber)) {
-                int cucumberWeight = cucumber.getWeight() * entry.getValue();
-                sortByWeight.put(cucumber, cucumberWeight);
-            } else if (entry.getKey().equals(eggplant)) {
-                int eggplantWeight = eggplant.getWeight() * entry.getValue();
-                sortByWeight.put(eggplant, eggplantWeight);
-            }
-        }
-        sortByWeight.entrySet().stream().sorted(Map.Entry.comparingByValue()).forEach(System.out::println);
+        salad.entrySet().stream().sorted(Map.Entry.comparingByValue()).forEach(System.out::println);
     }
 
     public void findVegetablesByColor(String color) {
