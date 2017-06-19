@@ -9,7 +9,7 @@ public class Demo {
 
     public static void main(String[] args) {
         Potato potato = new Potato(50);
-        Eggplant eggplant = new Eggplant(30);
+        Eggplant eggplant = new Eggplant(130);
         Cucumber cucumber = new Cucumber(200);
         Tomato tomato = new Tomato(150);
         List<Vegetable> myPocket = new ArrayList<>();
@@ -23,15 +23,15 @@ public class Demo {
         Map<Vegetable, Integer> createdSalad = hulio.createSalad(myPocket);
         hulio.displaySaladIngridients(createdSalad);
         Map<Vegetable, Integer> vegetableIntegerMap = hulio.getSalad();
-        caloriesCalculator.calculate(vegetableIntegerMap);
+        caloriesCalculator.calculate(createdSalad);
         hulio.addVegetables(tomato, 100);
         hulio.displaySaladIngridients(createdSalad);
         hulio.removeVegetables(potato);
-        caloriesCalculator.calculate(vegetableIntegerMap);
+        caloriesCalculator.calculate(createdSalad);
         hulio.displaySaladIngridients(createdSalad);
         hulio.sortVegetablesByWeight(createdSalad);
-        hulio.sortVegetablesByCalories();
+        hulio.sortVegetablesByCalories(createdSalad);
         hulio.compareVegetables(hulio.getTomato(), hulio.getCucumber());
-        hulio.findVegetablesByColor("red");
+        hulio.findVegetablesByColor("green");
     }
 }

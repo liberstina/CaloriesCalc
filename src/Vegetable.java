@@ -7,7 +7,7 @@ public abstract class Vegetable {
     protected String color;
     protected final String name;
 
-     public String getName() {
+    public String getName() {
         return name;
     }
 
@@ -35,10 +35,11 @@ public abstract class Vegetable {
         this.weight = weight;
     }
 
-    public Vegetable(String name, int calories, int weight) {
+    public Vegetable(String name, int calories, int weight, String color) {
         this.name = this.getClass().getName();
         this.calories = calories;
         this.weight = weight;
+        this.color = color;
     }
 
     @Override
